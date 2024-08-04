@@ -168,7 +168,7 @@
 
             // Function to update gauge, map, and coordinate history with new data
             function updateData() {
-                $.get('angin-berhembus/public/sensor-data/latest', function(data) {
+                $.get('angin-berhembus/public/api/sensor-data/latest', function(data) {
                     // Update gauge
                     gauge.refresh(data.gas_level);
                     $('#voltage').text(data.voltage);
