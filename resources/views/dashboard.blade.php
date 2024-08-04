@@ -99,7 +99,7 @@
     <div class="container-fluid flex-grow-1">
         <div class="row">
             <div class="col-12 mt-6">
-                <h1 class="text-center my-4">Monitoring Motor Hydrogen </h1>
+                <h1 class="text-center my-4">Monitoring Motor Hydrogen</h1>
             </div>
         </div>
         <div class="row">
@@ -121,7 +121,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col md-6 ">
+                <div class="col md-6">
                     <div id="gauge"></div>
                     <div class="gauge-status" id="gauge-status">Status: <span id="status">-</span></div>
                 </div>
@@ -168,7 +168,7 @@
 
             // Function to update gauge, map, and coordinate history with new data
             function updateData() {
-                $.get('angin-berhembus/public/api/sensor-data/latest', function(data) {
+                $.get('sensor-data/latest', function(data) {
                     // Update gauge
                     gauge.refresh(data.gas_level);
                     $('#voltage').text(data.voltage);

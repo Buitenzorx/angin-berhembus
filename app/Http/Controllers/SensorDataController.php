@@ -4,25 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\SensorData;
 use Illuminate\Http\Request;
-use Carbon\Carbon; // Pastikan Carbon diimport
+use Carbon\Carbon;
 
 class SensorDataController extends Controller
 {
     public function index()
     {
-        // Ambil data terakhir dari database
+        // Fetch the latest data
         $data = SensorData::latest()->first();
         
-        // Ambil beberapa data terakhir untuk history
+        // Fetch the latest 10 entries for history
         $history = SensorData::latest()->take(10)->get();
 
-        // Konversi waktu ke WIB
+        // Convert times to WIB
         $data->created_at = Carbon::parse($data->created_at)->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s');
         foreach ($history as $entry) {
             $entry->created_at = Carbon::parse($entry->created_at)->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s');
         }
 
-        // Kirim data ke view
+        // Send data to view
         return view('dashboard', compact('data', 'history'));
     }
 
@@ -40,5 +40,13 @@ class SensorDataController extends Controller
         SensorData::create($validated);
 
         return response()->json(['status' => 'success']);
+    }
+
+    public function latest()
+    {
+        // Fetch the latest data
+        $data = SensorData::latest()->first();
+
+        return response()->json($data);
     }
 }
